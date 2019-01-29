@@ -6,7 +6,7 @@ import store from './controller/store';
 import history from './controller/history';
 import AppContainer from './containers/AppContainer';
 
-const ENTRY_POINT = document.getElementById('#react-app-root');
+const ENTRY_POINT = document.querySelector('#react-app-root');
 
 // 创建应用的起始点
 const render = () => {
@@ -20,3 +20,34 @@ const render = () => {
 const renderError = error => {
   ReactDOM.render(<RedBox error={error} />, ENTRY_POINT);
 };
+
+// 注册`serviceWorker`
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('./serviceWorker')
+    .then(registration => {
+      console.log('Excellent, registered with scope: ', registration.scope);
+    })
+    .catch(e => console.error('ERROR IN SERVICE WORKERS: ', e));
+}
+
+// 这部分代码从生产包中排除
+if (__DEV__) {
+  const devRender = () => {
+    // -------------------------------------
+    // 开发阶段！激活`HMR`
+    // -------------------------------------
+    if (module.hot) {
+      module.hot.accept('./containers/AppContainer', () => render());
+    }
+  };
+
+  try {
+    devRender();
+  } catch (error) {
+    console.error(error);
+    renderError(error);
+  }
+} else {
+  render();
+}
