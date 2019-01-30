@@ -73,23 +73,19 @@ const rules = [
   // FILE/IMAGES
   {
     test: /\.woff(\?.*)?$/,
-    loader:
-      'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff'
+    loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff'
   },
   {
     test: /\.woff2(\?.*)?$/,
-    loader:
-      'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2'
+    loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2'
   },
   {
     test: /\.otf(\?.*)?$/,
-    loader:
-      'file-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentye'
+    loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentye'
   },
   {
     test: /\.ttf(\?.*)?$/,
-    loader:
-      'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream'
+    loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream'
   },
   {
     test: /\.eot(\?.*)?$/,
@@ -97,8 +93,7 @@ const rules = [
   },
   {
     test: /\.svg(\?.*)?$/,
-    loader:
-      'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=imgge/svg+xml'
+    loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=imgge/svg+xml'
   },
   {
     test: /\.(png|jpg)$/,
@@ -219,7 +214,7 @@ const createConfig = () => {
   // -------------------------------------
   webpackConfig.entry = {
     app: [
-      'babel-ployfill',
+      '@babel/polyfill',
       path
         .resolve(__dirname, 'src/index.js')
         // 直接在`App`中使用`webpack HMR`
@@ -250,10 +245,7 @@ const createConfig = () => {
   // Plugins
   // -------------------------------------
   debug(`Enable plugins for '${__NODE_ENV__}' Mode!`);
-  webpackConfig.plugins = [
-    new webpack.DefinePlugin({ __DEV__, __PROD__, __TEST__ }),
-    ...stagePlugins[__NODE_ENV__]
-  ];
+  webpackConfig.plugins = [new webpack.DefinePlugin({ __DEV__, __PROD__, __TEST__ }), ...stagePlugins[__NODE_ENV__]];
 
   // -------------------------------------
   // Finishing the Webpack configuration!

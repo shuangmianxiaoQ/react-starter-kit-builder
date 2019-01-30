@@ -1,13 +1,17 @@
 {
   "extends": ["airbnb", "plugin:import/react"],
   "parser": "babel-eslint",
-  "plugins": ["react", "react-hooks", "import", "jest"],
+  "plugins": ["react", "import", "jest", "react-hooks"],
   "env": {
     "browser": true,
     "node": true,
     "jest/globals": true
   },
   "settings": {
+    "react": {
+      "pargma": "React",
+      "version": "16.7"
+    },
     "import/parser": "babel-eslint",
     "import/ignore": ["node_modules"],
     "import/resolver": {
@@ -18,10 +22,6 @@
         "paths": ["./"],
         "extensions": [".js", ".jsx", ".ts", "tsx"]
       }
-    },
-    "react": {
-      "pargma": "React",
-      "version": "16.7"
     }
   },
   "globals": {
@@ -36,8 +36,185 @@
     "__COVERAFE__": false
   },
   "rules": {
-    "react-hooks/rules-of-hooks": "error",
+    "arrow-body-style": 0,
+    "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }],
+    "class-methods-use-this": 1,
+    "comma-dangle": [2, "never"],
+    "complexity": [2, 10],
+    "consistent-return": 1,
+    "curly": 0,
+    "default-case": 1,
+    "dot-location": [2, "property"],
+    "dot-notation": "off",
+    "func-name-matching": 1,
+    "func-style": [2, "declaration", { "allowAfterFunctions": true }],
+    "guard-for-in": 1,
     "indent": [1, 2, { "SwitchCase": 1 }],
+    "jsx-quotes": [2, "prefer-single"],
+    "linebreak-style": [1, "unix"],
+    "max-depth": [1, 2],
+    "max-len": [2, { "code": 120, "ignoreStrings": true }],
+    "max-nested-callbacks": [2, 3],
+    "max-params": [1, 3],
+    "max-statements": [2, 15],
+    "new-cap": [
+      2,
+      {
+        "capIsNewExceptions": ["When", "Then", "Given", "Nothing", "T", "F"],
+        "newIsCap": false,
+        "capIsNew": false
+      }
+    ],
+    "newline-after-var": [2, "always"],
+    "newline-per-chained-call": 1,
+    "no-case-declarations": 1,
+    "no-cond-assign": [1, "always"],
+    "no-console": "off",
+    "no-continue": 1,
+    "no-confusing-arrow": 1,
+    "no-else-return": ["error", { "allowElseIf": true }],
+    "no-mixed-operators": 0,
+    "no-multiple-empty-lines": [2, { "max": 1 }],
+    "no-param-reassign": [1, { "props": false }],
+    "no-plusplus": [1, { "allowForLoopAfterthoughts": true }],
+    "no-restricted-imports": [1, "lodash"],
+    "no-restricted-globals": [2, "find"],
+    "no-restricted-properties": 1,
+    "no-restricted-syntax": 1,
+    "no-return-assign": 1,
+    "no-shadow": 1,
+    "no-underscore-dangle": [
+      0,
+      {
+        "allowAfterThis": true,
+        "alow": [
+          "__REDUX_DEVTOOLS_EXTENSION__",
+          "__REDUX_DEVTOOLS_EXTENSION_COMPOSE__",
+          "__DEV__",
+          "__INITIAL_STATE__",
+          "_exception",
+          "__html"
+        ]
+      }
+    ],
+    "no-unused-expressions": [
+      2,
+      { "allowShortCircuit": true, "allowTernary": true }
+    ],
+    "no-unused-vars": [
+      "erros",
+      {
+        "vars": "all",
+        "args": "all",
+        "ignoreRestSiblings": false,
+        "argsIgnorePattern": "^nextProps|^nextState"
+      }
+    ],
+    "no-use-before-define": 1,
+    "no-useless-escape": 1,
+    "no-var": 0,
+    "object-curly-newline": [
+      "error",
+      { "multiline": true, "consistent": true }
+    ],
+    "one-var": [1, "never"],
+    "one-var-declaration-per-line": 1,
+    "operator-linebreak": [
+      2,
+      "after",
+      {
+        "overrides": {
+          ">": "before",
+          ">=": "before",
+          "<": "before",
+          "<=": "before",
+          "||": "before",
+          "&&": "before",
+          "+": "before",
+          "-": "before"
+        }
+      }
+    ],
+    "prefer-arrow-callback": 1,
+    "prefer-const": 1,
+    "prefer-promise-reject-errors": [1, { "allowEmptyReject": false }],
+    "prefer-template": 1,
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "quote-props": [1, "as-needed"],
+    "semi": ["error", "always"],
+    "space-before-function-paren": [2, "never"],
+    "vars-on-top": 0,
+
+    "react/display-name": [1, { "ignoreTranspilerName": false }],
+    "react/forbid-prop-types": [2, { "forbid": ["any"] }],
+    "react/jsx-filename-extension": 0,
+    "react/jsx-first-prop-new-line": 1,
+    "react/jsx-handler-names": [
+      1,
+      { "eventHandlerPrefix": "_handle", "eventHandlerPropPrefix": "on" }
+    ],
+    "react/jsx-indent": [1, 2],
+    "react/jsx-indent-props": [1, 2],
+    "react/jsx-key": 2,
+    "react/jsx-max-props-per-line": [1, { "maximum": 2 }],
+    "react/jsx-no-bind": 2,
+    "react/jsx-no-target-blank": 2,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-wrap-multilines": 0,
+    "react/no-aray-index-key": 1,
+    "react/no-children-prop": 1,
+    "react/no-direct-mutation-state": 2,
+    "react/no-find-dom-node": 1,
+    "react/no-multi-comp": [1, { "ignoreStateless": true }],
+    "react/no-unused-prop-types": 1,
+    "react/no-will-update-set-state": 1,
+    "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
+    "react/prop-types": 2,
+    "react/require-default-props": 1,
+    "react/require-optimization": [
+      1,
+      { "allowDecorators": ["pureRender", "connect"] }
+    ],
+    "react/sort-comp": [
+      2,
+      {
+        "order": [
+          "static-methods",
+          "mixins",
+          "displayName",
+          "actions",
+          "contextTypes",
+          "childContextTypes",
+          "propTypes",
+          "defaultProps",
+          "pure",
+          "statics",
+          "state",
+          "constructor",
+          "getDefaultProps",
+          "getInitialState",
+          "getChildContext",
+          "getStoresState",
+          "componentWillMount",
+          "componentDidMount",
+          "componentWillReceiveProps",
+          "shouldComponentUpdate",
+          "componentWillUpdate",
+          "componentDidUpdate",
+          "componentWillUnmount",
+          "/^component.+$/",
+          "/^get.+$/",
+          "/^on.+$/",
+          "/^handle.+$/",
+          "everything-else",
+          "/^render.+$/",
+          "render"
+        ]
+      }
+    ],
+    "react/style-prop-object": 0,
+
+    "import/default": 2,
     "import/extensions": [
       1,
       "always",
@@ -50,22 +227,40 @@
         ".tsx": "never"
       }
     ],
+    "import/first": 1,
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/newline-after-import": 0,
+    "import/no-commonjs": [0, { "allowPrimitiveModules": true }],
+    "import/no-deprecated": 1,
+    "import/no-dynamic-require": 1,
+    "import/no-extraneous-dependencies": 0,
     "import/no-named-as-default": 0,
-    "linebreak-style": [1, "unix"],
-    "no-restricted-imports": [1, "lodash"],
-    "no-restricted-globals": [2, "find"],
-    "no-var": 0,
-    "no-shadow": 1,
-    "vars-on-top": 0,
-    "consistent-return": 1,
-    "no-unused-vars": [
-      "erros",
-      {
-        "vars": "all",
-        "args": "all",
-        "ignoreRestSiblings": false,
-        "argsIgnorePattern": "^nextProps|^nextState"
-      }
-    ]
+    "import/no-unresolved": [2, { "commonjs": true, "amd": false }],
+    "import/no-webpack-loader-syntax": 1,
+    "import/prefer-default-export": 1,
+    "import/unambiguous": 0,
+
+    "jsx-a11y/alt-text": 1,
+    "jsx-a11y/anchor-has-content": 1,
+    "jsx-a11y/aria-role": 1,
+    "jsx-a11y/html-has-lang": 1,
+    "jsx-a11y/href-no-hash": 0,
+    "jsx-a11y/iframe-has-title": 1,
+    "jsx-a11y/img-has-alt": 0,
+    "jsx-a11y/interactive-supports-focus": 1,
+    "jsx-a11y/lable-has-for": 0,
+    "jsx-a11y/media-has-captoin": 1,
+    "jsx-a11y/no-autofocus": 1,
+    "jsx-a11y/no-noninteractive-element-interactions": 1,
+    "jsx-a11y/no-noninteractive-element-to-interactive-role": 1,
+    "jsx-a11y/no-noninteractive-tabindex": 1,
+    "jsx-a11y/no-static-element-interactions": 1,
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/valid-expect": "error",
+
+    "react-hooks/rules-of-hooks": "error"
   }
 }
