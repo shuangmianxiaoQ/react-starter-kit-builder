@@ -1,4 +1,3 @@
-// import global vars for a whole app
 require('./globals');
 
 const path = require('path');
@@ -11,17 +10,17 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const debug = require('debug')('app:webpack:config');
 
 // -------------------------------------
-// 规则
+// Rules for File Loaders
 // -------------------------------------
 const rules = [
   // PRELOAD CHECKING
   {
-    enforce: 'pre', // 指定`loader`种类
+    enforce: 'pre', // `loader`执行顺序放到最前面
     test: /\.(js|jsx)?$/,
     exclude: /(node_modules|bower_components)/,
     loader: 'eslint-loader',
     options: {
-      quiet: true // 仅处理和报告错误，忽略警告
+      quiet: true // 处理和报告错误，忽略警告
     }
   },
   {
@@ -37,9 +36,7 @@ const rules = [
   // JAVASCRIPT/JSON
   {
     test: /\.html$/,
-    use: {
-      loader: 'html-loader'
-    }
+    loader: 'html-loader'
   },
   {
     test: /\.(js|jsx|ts|tsx)?$/,
@@ -48,7 +45,7 @@ const rules = [
   },
   {
     // 将`JSON`转换为`JS`
-    type: 'javascript/auto',
+    type: 'javascript/auto', // 绕过`webpack`内置的`JSON`处理
     test: /\.json$/,
     loader: 'json-loader'
   },
@@ -61,7 +58,7 @@ const rules = [
       {
         loader: 'css-loader',
         options: {
-          importLoaders: 2,
+          importLoaders: 2, // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
           modules: true, // 启用 `CSS Modles`规范
           localIdentName: '[local]--[hash:base64:5]'
         }
@@ -114,8 +111,8 @@ const optimization = {
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: {
-            unused: true,
-            dead_code: true,
+            unused: true, // 删除未被引用的函数和变量
+            dead_code: true, //  移除没被引用的代码
             warnings: false
           }
         },
@@ -141,15 +138,15 @@ const stagePlugins = {
     new HtmlWebapckPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
       filename: 'index.html',
-      inject: 'body',
+      inject: 'body', // 所有的`JS`资源放在`body`底部
       minify: false,
       chunksSortMode: 'auto'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    // 有助于减少来自`CLI`的无用警告消息
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin() // 有助于减少来自`CLI`的无用警告消息
   ],
   production: [
+    // 将CSS提取到单独的文件中
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[name].[hash].css'
@@ -158,50 +155,36 @@ const stagePlugins = {
       template: path.resolve(__dirname, 'src/index.html'),
       filename: 'index.html',
       inject: 'body',
-      minify: {
-        collapseWhitespace: true
-      },
+      minify: { collapseWhitespace: true },
       chunksSortMode: 'auto'
     })
   ]
 };
 
 // -------------------------------------
-// 阶段配置注入 [DEVELOPMENT, PRODUCTION]
+// 阶段配置注入
 // -------------------------------------
 const stageConfig = {
-  development: {
-    devtool: '',
-    stats: {
-      chunks: false,
-      children: false,
-      chunkModules: false,
-      colors: false
-    }
-  },
-  production: {
-    devtool: 'source-map',
-    stats: {
-      chunks: true,
-      chunkModules: true,
-      colors: true
-    }
+  devtool: 'source-map',
+  stats: {
+    chunks: true,
+    chunkModules: true,
+    colors: true
   }
 };
 
 const createConfig = () => {
   debug('Creating configuration.');
-  debug(`Enabling devtools for '${__NODE_ENV__} Mode'`);
+  debug(`Enabling devtools for '${__NODE_ENV__} Mode!'`);
 
   const webpackConfig = {
     mode: __DEV__ ? 'development' : 'production',
     name: 'client',
     target: 'web',
-    devtool: stageConfig[__NODE_ENV__].devtool,
-    stats: stageConfig[__NODE_ENV__].stats,
     modules: {
       rules: [...rules]
     },
+    ...stageConfig,
     ...optimization,
     resolve: {
       modules: ['node_modules'],
@@ -217,7 +200,7 @@ const createConfig = () => {
       '@babel/polyfill',
       path
         .resolve(__dirname, 'src/index.js')
-        // 直接在`App`中使用`webpack HMR`
+        // 可以直接在`App`中使用`webpack HMR`
         .concat('webpack-hot-middleware/client?path=/__webpack_hmr')
     ]
   };
@@ -226,7 +209,7 @@ const createConfig = () => {
   // Bundle externals
   // -------------------------------------
   webpackConfig.externals = {
-    // 排除`react`包将在`index.html`中从`CDN`获取`react`包，使得捆绑包更轻量级
+    // 排除`react`包，在`index.html`中从`CDN`获取`react`包，使得捆绑包更轻量级
     react: 'React',
     'react-dom': 'ReactDOM'
   };
