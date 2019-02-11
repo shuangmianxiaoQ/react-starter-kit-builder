@@ -1,4 +1,3 @@
-// import global vars for a whole app
 require('../globals');
 
 const path = require('path');
@@ -23,7 +22,7 @@ const devMiddlewareOptions = {
 // Server Configuration
 // -------------------------------------
 browserSync({
-  open: false,
+  open: 'local',
   ghostMode: {
     clicks: false,
     forms: false,
@@ -32,8 +31,7 @@ browserSync({
   server: {
     baseDir: path.resolve(__dirname, '../src'),
     middleware: [
-      historyApiFallback(),
-      // 启用`HMR`
+      historyApiFallback(), // 在导览应用页面期间更新浏览器历史记录
       webpackDevMiddleware(bundler, devMiddlewareOptions),
       webpackHotMiddleware(bundler)
     ]

@@ -3,13 +3,7 @@ import { routerMiddleware } from 'connected-react-router';
 import initialState from './initialState';
 import history from './history';
 
-import {
-  logger,
-  makeRootReducer,
-  sagaMiddleware as saga,
-  rootSaga,
-  runSaga
-} from './middleware';
+import { logger, makeRootReducer, sagaMiddleware as saga, rootSaga, runSaga } from './middleware';
 
 //创建`root store`配置
 const rootStore = () => {
@@ -41,7 +35,7 @@ const rootStore = () => {
     )
   );
 
-  // 代码分隔期间注入`saga`
+  // 代码拆分期间注入`saga`
   store.runSaga = runSaga;
   runSaga(rootSaga);
   store.asyncReducers = {};

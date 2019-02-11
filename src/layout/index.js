@@ -9,7 +9,7 @@ import styles from '../styles/index.scss';
 const CoreLayout = () => (
   <div className={styles.appWrapper}>
     <Header />
-    <Route exact path="/" component={Body} />
+    {/* <Route exact path="/" component={Body} /> */}
     <Footer />
   </div>
 );
