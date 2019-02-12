@@ -14,5 +14,4 @@ export function* rootSaga() {
 }
 
 export { cancelTask, injectSaga, runSaga };
-
 export default sagaMiddleware;

@@ -53,6 +53,7 @@
     "enzyme-to-json": "^3.3.5",
     "eslint": "^5.12.1",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-webpack": "^0.11.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.16.0",
@@ -70,6 +71,7 @@
     "jest-cli": "^24.0.0",
     "json-loader": "^0.5.7",
     "jsonlint": "^1.6.3",
+    "lerna": "^3.11.1",
     "lint-staged": "^8.1.1",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
@@ -111,16 +113,24 @@
   "scripts": {
     "start:dev": "better-npm-run start:dev",
     "start:prod": "better-npm-run start:prod",
-    "test": "better-npm-run test",
+    "start:test": "better-npm-run test",
+    "unitTest": "jest --config jest.config.js",
     "clean": "rimraf dist",
     "push": "npm run lint && git push",
     "compile": "better-npm-run compile",
-    "lint": "prettire --single-quote --print-width 120 --write '{src,tests}/**/*.js'",
+    "lint": "prettier --single-quote --print-width 120 --write \"{src,server}/**/*.{js,ts}\"",
     "tslint": "tslint --fix -c tslint.json",
-    "eslint": "eslint --quiet ../../.eslintrc",
-    "csslint": "stylelint **/*.scss --config ../../.stylelintrc"
+    "eslint": "eslint --quiet .eslintrc",
+    "csslint": "stylelint **/*.scss --config .stylelintrc"
   },
   "betterScripts": {
+    "compile": {
+      "command": "node server/compiler",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*"
+      }
+    },
     "start:dev": {
       "command": "node server/server",
       "env": {
@@ -135,17 +145,10 @@
         "DEBUG": "app:*"
       }
     },
-    "test": {
+    "start:test": {
       "command": "node server/server",
       "env": {
         "NODE_ENV": "test",
-        "DEBUG": "app:*"
-      }
-    },
-    "compile": {
-      "command": "node server/compiler",
-      "env": {
-        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     }
@@ -153,32 +156,32 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
-    },
-    "lint-staged": {
-      "*.json": [
-        "jsonlint --formatter=verbose",
-        "git add"
-      ],
-      ".@(css|scss)": [
-        "stylelint --fix --formatter=verbose",
-        "git add"
-      ],
-      "*.cssmodule": [
-        "stylelint --fix --syntax scss --formatter=verbose",
-        "git add"
-      ],
-      "*.@(js|jsx)": [
-        "prettier --write",
-        "eslint --fix --quiet",
-        "git add",
-        "jest --bail --findRelatedTests"
-      ],
-      "*.@(ts|tsx)": [
-        "prettier --write --parser typescript",
-        "tslint --fix -c tslint.json",
-        "git add",
-        "jest --bail --findRelatedTests"
-      ]
     }
+  },
+  "lint-staged": {
+    "*.json": [
+      "jsonlint --formatter=verbose",
+      "git add"
+    ],
+    "*.@(css|scss)": [
+      "stylelint --fix --formatter=verbose",
+      "git add"
+    ],
+    "*.cssmodule": [
+      "stylelint --fix --syntax scss --formatter=verbose",
+      "git add"
+    ],
+    "*.@(js|jsx)": [
+      "prettier --write",
+      "eslint --fix --quiet",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ],
+    "*.@(ts|tsx)": [
+      "prettier --write --parser typescript",
+      "tslint --fix -c tslint.json",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ]
   }
 }

@@ -181,7 +181,7 @@ const createConfig = () => {
     mode: __DEV__ ? 'development' : 'production',
     name: 'client',
     target: 'web',
-    modules: {
+    module: {
       rules: [...rules]
     },
     ...stageConfig,
@@ -196,13 +196,9 @@ const createConfig = () => {
   // Entry Points
   // -------------------------------------
   webpackConfig.entry = {
-    app: [
-      '@babel/polyfill',
-      path
-        .resolve(__dirname, 'src/index.js')
-        // 可以直接在`App`中使用`webpack HMR`
-        .concat('webpack-hot-middleware/client?path=/__webpack_hmr')
-    ]
+    app: ['@babel/polyfill', path.resolve(__dirname, 'src/index.js')]
+      // 可以直接在`App`中使用`webpack HMR`
+      .concat('webpack-hot-middleware/client?path=/__webpack_hmr')
   };
 
   // -------------------------------------
@@ -217,7 +213,7 @@ const createConfig = () => {
   // -------------------------------------
   // Bundle Output
   // -------------------------------------
-  webpack.output = {
+  webpackConfig.output = {
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),

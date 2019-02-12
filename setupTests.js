@@ -1,10 +1,8 @@
-global.requestAnimationFrame = cb => {
-  setTimeout(cb, 0);
-};
+global.requestAnimationFrame = cb => setTimeout(cb, 0);
 
 global.matchMedia =
-  window.matchMedia ||
-  function() {
+  window.matchMedia
+  || function() {
     return {
       matches: false,
       addListener: () => {},

@@ -47,7 +47,7 @@
     "dot-location": [2, "property"],
     "dot-notation": "off",
     "func-name-matching": 1,
-    "func-style": [2, "declaration", { "allowAfterFunctions": true }],
+    "func-style": [2, "declaration", { "allowArrowFunctions": true }],
     "guard-for-in": 1,
     "indent": [1, 2, { "SwitchCase": 1 }],
     "jsx-quotes": [2, "prefer-single"],
@@ -97,12 +97,9 @@
         ]
       }
     ],
-    "no-unused-expressions": [
-      2,
-      { "allowShortCircuit": true, "allowTernary": true }
-    ],
+    "no-unused-expressions": [2, { "allowShortCircuit": true, "allowTernary": true }],
     "no-unused-vars": [
-      "erros",
+      "error",
       {
         "vars": "all",
         "args": "all",
@@ -113,10 +110,7 @@
     "no-use-before-define": 1,
     "no-useless-escape": 1,
     "no-var": 0,
-    "object-curly-newline": [
-      "error",
-      { "multiline": true, "consistent": true }
-    ],
+    "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
     "one-var": [1, "never"],
     "one-var-declaration-per-line": 1,
     "operator-linebreak": [
@@ -149,10 +143,7 @@
     "react/forbid-prop-types": [2, { "forbid": ["any"] }],
     "react/jsx-filename-extension": 0,
     "react/jsx-first-prop-new-line": 1,
-    "react/jsx-handler-names": [
-      1,
-      { "eventHandlerPrefix": "_handle", "eventHandlerPropPrefix": "on" }
-    ],
+    "react/jsx-handler-names": [1, { "eventHandlerPrefix": "_handle", "eventHandlerPropPrefix": "on" }],
     "react/jsx-indent": [1, 2],
     "react/jsx-indent-props": [1, 2],
     "react/jsx-key": 2,
@@ -171,10 +162,7 @@
     "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
     "react/prop-types": 2,
     "react/require-default-props": 1,
-    "react/require-optimization": [
-      1,
-      { "allowDecorators": ["pureRender", "connect"] }
-    ],
+    "react/require-optimization": [1, { "allowDecorators": ["pureRender", "connect"] }],
     "react/sort-comp": [
       2,
       {

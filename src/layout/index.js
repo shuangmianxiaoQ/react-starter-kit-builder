@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+// import { Route, withRouter } from 'react-router-dom';
 
 import { Header, Footer } from '../components';
 
-import { Body } from '../containers/Wrappers';
+// import { Body } from '../containers/Wrappers';
 import styles from '../styles/index.scss';
 
 const CoreLayout = () => (

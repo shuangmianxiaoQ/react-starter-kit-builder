@@ -5,7 +5,7 @@ import history from './history';
 
 import { logger, makeRootReducer, sagaMiddleware as saga, rootSaga, runSaga } from './middleware';
 
-//创建`root store`配置
+// 创建`root store`配置
 const rootStore = () => {
   const middleware = [];
 
@@ -25,7 +25,9 @@ const rootStore = () => {
     enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__());
   }
 
+  // -------------------------------------
   // 创建`redux store`
+  // -------------------------------------
   const store = createStore(
     makeRootReducer(),
     initialState,
