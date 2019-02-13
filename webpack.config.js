@@ -2,7 +2,7 @@ require('./globals');
 
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebapckPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -60,7 +60,7 @@ const rules = [
         options: {
           importLoaders: 2, // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
           modules: true, // 启用 `CSS Modles`规范
-          localIdentName: '[local]--[hash:base64:5]'
+          localIdentName: '[name]__[local]--[hash:base64:5]'
         }
       },
       'postcss-loader',
@@ -78,7 +78,7 @@ const rules = [
   },
   {
     test: /\.otf(\?.*)?$/,
-    loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentye'
+    loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype'
   },
   {
     test: /\.ttf(\?.*)?$/,
@@ -90,7 +90,7 @@ const rules = [
   },
   {
     test: /\.svg(\?.*)?$/,
-    loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=imgge/svg+xml'
+    loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml'
   },
   {
     test: /\.(png|jpg)$/,
@@ -135,7 +135,7 @@ const stagePlugins = {
     new BundleAnalyzerPlugin()
   ],
   development: [
-    new HtmlWebapckPlugin({
+    new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
       filename: 'index.html',
       inject: 'body', // 所有的`JS`资源放在`body`底部
@@ -151,7 +151,7 @@ const stagePlugins = {
       filename: '[name].[hash].css',
       chunkFilename: '[name].[hash].css'
     }),
-    new HtmlWebapckPlugin({
+    new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
       filename: 'index.html',
       inject: 'body',

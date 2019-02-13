@@ -18,7 +18,7 @@ function webpackCompiler() {
       if (err) {
         debug('Webpack compiler encountered a fatal error.', err);
 
-        return reject(err);
+        reject(err);
       }
 
       const jsonStats = stats.toJson();

@@ -6,7 +6,7 @@ import store from './controller/store';
 import history from './controller/history';
 import AppContainer from './containers/AppContainer';
 
-const ENTRY_POINT = document.querySelector('#react-app-root');
+const ENTRY_POINT = document.getElementById('react-app-root');
 
 // 创建应用的起始点
 const render = () => {
@@ -21,7 +21,7 @@ const renderError = error => {
 // 注册`serviceWorker`
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('./serviceWorker')
+    .register('./serviceWorker.js')
     .then(registration => {
       console.log('Excellent, registered with scope: ', registration.scope);
     })

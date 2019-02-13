@@ -2,7 +2,7 @@
   "name": "react-starter-kit-builder",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "ShuangmianxiaoQ",
+  "author": "shuangmianxiaoQ",
   "license": "MIT",
   "dependencies": {
     "connect-history-api-fallback": "^1.6.0",
@@ -121,6 +121,7 @@
     "lint": "prettier --single-quote --print-width 120 --write \"{src,server}/**/*.{js,ts}\"",
     "tslint": "tslint --fix -c tslint.json",
     "eslint": "eslint --quiet .eslintrc",
+    "eslint:fix": "eslint --fix \"{src,server}/**/*.js\"",
     "csslint": "stylelint **/*.scss --config .stylelintrc"
   },
   "betterScripts": {
