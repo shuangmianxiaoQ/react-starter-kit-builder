@@ -1,6 +1,7 @@
 const initialState = {
   app: {
-    appName: 'React Starter Kit Builder'
+    appName: 'React Starter Kit Builder',
+    imageToShow: 1
   }
 };
 

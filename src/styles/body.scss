@@ -1,0 +1,29 @@
+.animWrap {
+  position: relative;
+}
+
+:global {
+  .mainImage-enter {
+    opacity: 0;
+    position: absolute;
+    transition: all 500ms linear;
+    transform: translateX(-10%);
+  }
+
+  .mainImage-enter-active {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  .mainImage-exit {
+    opacity: 1;
+    transition: all 500ms linear;
+    transform: translateX(0%);
+  }
+
+  .mainImage-exit-active {
+    opacity: 0;
+    transition: all 500ms linear;
+    transform: translateX(10%);
+  }
+}

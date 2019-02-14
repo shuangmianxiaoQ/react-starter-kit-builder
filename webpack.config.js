@@ -223,7 +223,7 @@ const createConfig = () => {
   // -------------------------------------
   // Plugins
   // -------------------------------------
-  debug(`Enable plugins for '${__NODE_ENV__}' Mode!`);
+  debug(`Enable plugins for '${__NODE_ENV__} Mode!'`);
   webpackConfig.plugins = [new webpack.DefinePlugin({ __DEV__, __PROD__, __TEST__ }), ...stagePlugins[__NODE_ENV__]];
 
   // -------------------------------------

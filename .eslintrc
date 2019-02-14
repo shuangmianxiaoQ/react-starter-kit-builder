@@ -49,8 +49,8 @@
     "func-name-matching": 1,
     "func-style": [2, "declaration", { "allowArrowFunctions": true }],
     "guard-for-in": 1,
+    "implicit-arrow-linebreak": 0,
     "indent": [1, 2, { "SwitchCase": 1 }],
-    "jsx-quotes": [2, "prefer-single"],
     "linebreak-style": [1, "unix"],
     "max-depth": [1, 2],
     "max-len": [2, { "code": 120, "ignoreStrings": true }],
@@ -99,7 +99,7 @@
     ],
     "no-unused-expressions": [2, { "allowShortCircuit": true, "allowTernary": true }],
     "no-unused-vars": [
-      "error",
+      "warn",
       {
         "vars": "all",
         "args": "all",
@@ -139,6 +139,7 @@
     "space-before-function-paren": [2, "never"],
     "vars-on-top": 0,
 
+    "react/destructuring-assignment": [1, "always", { "ignoreClassFields": true }],
     "react/display-name": [1, { "ignoreTranspilerName": false }],
     "react/forbid-prop-types": [2, { "forbid": ["any"] }],
     "react/jsx-filename-extension": 0,
@@ -147,7 +148,6 @@
     "react/jsx-indent": [1, 2],
     "react/jsx-indent-props": [1, 2],
     "react/jsx-key": 2,
-    "react/jsx-max-props-per-line": [1, { "maximum": 2 }],
     "react/jsx-no-bind": 2,
     "react/jsx-no-target-blank": 2,
     "react/jsx-one-expression-per-line": 0,

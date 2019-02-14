@@ -9,7 +9,7 @@ export function* someSaga() {
       throw new Error('Error in payload!');
     }
 
-    yield put(someAsyncAction);
+    yield put(someAsyncAction(payload));
   } catch (error) {
     throw new Error('Some error in sagas occured!');
   }

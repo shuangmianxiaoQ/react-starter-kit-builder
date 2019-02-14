@@ -4,13 +4,12 @@ import app from '../../modules/reducers';
 import history from '../history';
 
 // root redux reducer
-const makeRooReducer = asyncReducers => {
-  return combineReducers({
+const makeRooReducer = asyncReducers =>
+  combineReducers({
     ...asyncReducers,
     app,
     router: connectRouter(history)
   });
-};
 
 export const injectReudcer = (store, { key, reducer }) => {
   if (Object.hasOwnProperty.call(store.asyncReducer, key)) return;

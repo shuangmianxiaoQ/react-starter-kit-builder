@@ -36,6 +36,8 @@ if (__DEV__) {
     if (module.hot) {
       module.hot.accept('./containers/AppContainer', () => render());
     }
+
+    render();
   };
 
   try {

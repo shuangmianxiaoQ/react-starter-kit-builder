@@ -2,12 +2,12 @@
 self.addEventListener('push', event => {
   if (Notification.permission === 'default') {
     self.Notification.requestPermission().then(res => console.log(res));
-    console.log('The permission request was dismissed');
+    console.log('The permission request was dismissed.');
     return;
   }
 
   if (Notification.permission === 'denied') {
-    console.log(Notification.permission, "Permission wasn't granted. Allow a retry");
+    console.log(Notification.permission, "Permission wasn't granted. Allow a retry.");
     return;
   }
 
@@ -22,4 +22,4 @@ self.addEventListener('push', event => {
   }
 });
 
-self.addEventListener('sync', event => console.log(event.target, 'Sync is completed!'));
+self.addEventListener('sync', event => console.log(event.tag, 'Sync is completed!!!'));
