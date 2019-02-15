@@ -51,7 +51,7 @@
     "guard-for-in": 1,
     "implicit-arrow-linebreak": 0,
     "indent": [1, 2, { "SwitchCase": 1 }],
-    "linebreak-style": [1, "unix"],
+    "linebreak-style": 0,
     "max-depth": [1, 2],
     "max-len": [2, { "code": 120, "ignoreStrings": true }],
     "max-nested-callbacks": [2, 3],
