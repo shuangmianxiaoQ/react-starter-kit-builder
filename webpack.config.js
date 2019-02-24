@@ -8,6 +8,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const debug = require('debug')('app:webpack:config');
+const os = require('os');
 
 // -------------------------------------
 // Rules for File Loaders
@@ -173,6 +174,25 @@ const stageConfig = {
   }
 };
 
+// 获取本机电脑IP
+const getIPAdress = () => {
+  const interfaces = os.networkInterfaces();
+
+  for (const devName in interfaces) {
+    if ({}.hasOwnProperty.call(interfaces, devName)) {
+      const iface = interfaces[devName];
+
+      for (var i = 0; i < iface.length; i++) {
+        const alias = iface[i];
+
+        if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+          return alias.address;
+        }
+      }
+    }
+  }
+};
+
 const createConfig = () => {
   debug('Creating configuration.');
   debug(`Enabling devtools for '${__NODE_ENV__} Mode!'`);
@@ -224,7 +244,17 @@ const createConfig = () => {
   // Plugins
   // -------------------------------------
   debug(`Enable plugins for '${__NODE_ENV__} Mode!'`);
-  webpackConfig.plugins = [new webpack.DefinePlugin({ __DEV__, __PROD__, __TEST__ }), ...stagePlugins[__NODE_ENV__]];
+  webpackConfig.plugins = [
+    new webpack.DefinePlugin({
+      __DEV__,
+      __PROD__,
+      __TEST__,
+      'process.env': {
+        SERVERIP: JSON.stringify({ serverIp: getIPAdress() })
+      }
+    }),
+    ...stagePlugins[__NODE_ENV__]
+  ];
 
   // -------------------------------------
   // Finishing the Webpack configuration!
