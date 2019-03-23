@@ -114,7 +114,7 @@
   "scripts": {
     "start:dev": "better-npm-run start:dev",
     "start:prod": "better-npm-run start:prod",
-    "start:test": "better-npm-run test",
+    "start:test": "better-npm-run start:test",
     "unitTest": "jest --config jest.config.js",
     "clean": "rimraf dist",
     "push": "npm run lint && git push",
