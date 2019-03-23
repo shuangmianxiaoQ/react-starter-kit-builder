@@ -147,7 +147,7 @@
         "DEBUG": "app:*"
       }
     },
-    "start:test": {
+    "test": {
       "command": "node server/server",
       "env": {
         "NODE_ENV": "test",
