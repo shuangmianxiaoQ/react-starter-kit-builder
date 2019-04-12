@@ -30,8 +30,6 @@ class Body extends PureComponent {
   render() {
     const { imageToShow } = this.props;
 
-    console.log(process.env.SERVERIP);
-
     return (
       <div className={styles.body}>
         <button type="button" onClick={this._handleClick} className={buttonStyles.button}>
