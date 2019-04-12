@@ -3,11 +3,13 @@ self.addEventListener('push', event => {
   if (Notification.permission === 'default') {
     self.Notification.requestPermission().then(res => console.log(res));
     console.log('The permission request was dismissed.');
+
     return;
   }
 
   if (Notification.permission === 'denied') {
     console.log(Notification.permission, "Permission wasn't granted. Allow a retry.");
+
     return;
   }
 
